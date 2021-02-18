@@ -9,15 +9,16 @@ jobs:
       matrix:
         node: [10]
     runs-on: ubuntu-20.04
+    container: circleci/node:10.23
     defaults:
       run:
         working-directory: packages/uxpin-merge-cli
 
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node }}
+    # - uses: actions/setup-node@v2
+    #   with:
+    #     node-version: ${{ matrix.node }}
 
     - name: Cache merge-cli dependencies
       id: cache-merge-cli-dependencies
