@@ -19,12 +19,12 @@ jobs:
       with:
         node-version: ${{ matrix.node }}
 
-    - name: Cache merge-cli dependencies
-      id: cache-merge-cli-dependencies
-      uses: actions/cache@v2
-      with:
-        path: '**/uxpin-merge-cli/node_modules'
-        key: uxpin-merge-cli-dependencies-cache-${{ hashFiles('**/uxpin-merge-cli/package.json') }}
+    # - name: Cache merge-cli dependencies
+    #   id: cache-merge-cli-dependencies
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: '**/uxpin-merge-cli/node_modules'
+    #     key: uxpin-merge-cli-dependencies-cache-${{ hashFiles('**/uxpin-merge-cli/package.json') }}
 
     - name: Install dependencies for merge-cli
       run: make dependencies
