@@ -30,8 +30,8 @@ jobs:
       id: cache-merge-cli-dependencies
       uses: actions/cache@v2
       with:
-        path: ./node_modules
-        key: uxpin-merge-cli-dependencies-cache-${{ hashFiles('package.json') }}
+        path: '**/uxpin-merge-cli/node_modules'
+        key: uxpin-merge-cli-dependencies-cache-${{ hashFiles('**/uxpin-merge-cli/package.json') }}
 
     - name: Install dependencies for merge-cli
       if: steps.cache-merge-cli-dependencies.outputs.cache-hit != 'true'
@@ -41,11 +41,9 @@ jobs:
       id: cache-test-resources
       uses: actions/cache@v2
       with:
-        path: ./test/resources/repos
-        key: uxpin-merge-cli-test-repos-${{ hashFiles('/shell_scripts/test_resources/Makefile') }}
+        path: '**/test/resources/repos'
+        key: uxpin-merge-cli-test-repos-${{ hashFiles('**/shell_scripts/test_resources/Makefile') }}
 
-    - name: "Allow cloning git dependencies from github"
-      run: mkdir -p ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
     - name: Create test resources
       if: steps.cache-test-resources.outputs.cache-hit != 'true'
       run: make test-resources
