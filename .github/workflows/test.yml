@@ -19,13 +19,6 @@ jobs:
       with:
         node-version: ${{ matrix.node }}
 
-    - name: Setting $HOME/.npmrc to install built-utils
-      run: echo "${NPMRC}" > $HOME/.npmrc
-      env:
-        NPMRC: |
-          @uxpin:registry=https://npm.pkg.github.com/
-          //npm.pkg.github.com/:_authToken="${{ secrets.NPMRC_READ_TOKEN }}"
-
     - name: Cache merge-cli dependencies
       id: cache-merge-cli-dependencies
       uses: actions/cache@v2
