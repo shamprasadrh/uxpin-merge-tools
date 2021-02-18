@@ -27,7 +27,6 @@ jobs:
         key: uxpin-merge-cli-dependencies-cache-${{ hashFiles('**/uxpin-merge-cli/package.json') }}
 
     - name: Install dependencies for merge-cli
-      if: steps.cache-merge-cli-dependencies.outputs.cache-hit != 'true'
       run: make dependencies
 
     - name: Cache test resources
@@ -38,7 +37,6 @@ jobs:
         key: uxpin-merge-cli-test-repos-${{ hashFiles('**/shell_scripts/test_resources/Makefile') }}
 
     - name: Create test resources
-      if: steps.cache-test-resources.outputs.cache-hit != 'true'
       run: make test-resources
 
     - name: Check
