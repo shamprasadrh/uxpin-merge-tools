@@ -47,5 +47,5 @@ jobs:
       run: make build
     - name: Install dependencies for uxpin-merge-storybook-preset-addon
       run: cd ../uxpin-merge-storybook-preset-addon && yarn install
-    # - name: Test
-    #   run: make test-ci
+    - name: Test
+      run: make test-ci
