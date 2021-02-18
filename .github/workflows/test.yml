@@ -7,8 +7,7 @@ jobs:
   test:
     strategy:
       matrix:
-        node: [12.18.1]
-
+        node: [10]
     runs-on: ubuntu-20.04
     defaults:
       run:
@@ -16,10 +15,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node }}
-    - run: yarn policies set-version 1.22.4
 
     - name: Setting $HOME/.npmrc to install built-utils
       run: echo "${NPMRC}" > $HOME/.npmrc
@@ -33,7 +31,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./node_modules
-        key: uxpin-merge-cli-dependencies-cache-{{ hashFiles "package.json" }}
+        key: uxpin-merge-cli-dependencies-cache-${{ hashFiles('package.json') }}
 
     - name: Install dependencies for merge-cli
       if: steps.cache-merge-cli-dependencies.outputs.cache-hit != 'true'
@@ -44,7 +42,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./test/resources/repos
-        key: uxpin-merge-cli-test-repos--${{ hashFiles('shell_scripts/test_resources/Makefile') }}
+        key: uxpin-merge-cli-test-repos-${{ hashFiles('/shell_scripts/test_resources/Makefile') }}
 
     - name: Create test resources
       if: steps.cache-test-resources.outputs.cache-hit != 'true'
